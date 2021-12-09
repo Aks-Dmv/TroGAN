@@ -1,1 +1,3 @@
 # TroGAN
+
+## Installation Instructions
