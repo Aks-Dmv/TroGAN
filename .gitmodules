@@ -4,3 +4,6 @@
 [submodule "quickdraw"]
 	path = quickdraw
 	url = https://github.com/eMYKion/quickdraw-dataset.git
+[submodule "ganSketching"]
+	path = ganSketching
+	url = https://github.com/eMYKion/GANSketching.git
