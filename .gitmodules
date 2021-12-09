@@ -1,0 +1,6 @@
+[submodule "cut"]
+	path = cut
+	url = https://github.com/eMYKion/contrastive-unpaired-translation.git
+[submodule "quickdraw"]
+	path = quickdraw
+	url = https://github.com/eMYKion/quickdraw-dataset.git
