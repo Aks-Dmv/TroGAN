@@ -1,7 +1,11 @@
-# TroGAN
-This is our PyTorch implementation of TroGAN: Disguising Contours to Look Like Sketches. We implement a method that builds off the [GAN Sketching](https://github.com/PeterWang512/GANSketching) architecture by introducing a translation model that shifts the distribution of fake sketches to be more similar to that of the user-sketches while also retaining the essence of the initially generated image. Such a formulation avoids overfitting by the discriminator, thus reducing the discriminability and increasing gradient propagation.
+# TroGAN: Disguising Contours to Look Like Sketches
+This is our PyTorch implementation of TroGAN: Disguising Contours to Look Like Sketches. We implement a method that builds off the [GAN Sketching](https://github.com/PeterWang512/GANSketching) architecture by introducing an unpaired translation model trained using [CUT](https://github.com/taesungp/contrastive-unpaired-translation) that shifts the distribution of fake sketches to be more similar to that of the user-sketches while also retaining the essence of the initially generated image. Such a formulation avoids overfitting by the discriminator, thus reducing the discriminability and increasing gradient propagation.
 
 Work done by Akshay Dharmavaram and Mayank Mali in partial fullfillment of [16-824: Visual Learning and Recognition](https://visual-learning.cs.cmu.edu/index.html) while at CMU.
+
+## Results
+Our method (shown in blue) has shown to reduce the training time of [GAN Sketching](https://github.com/PeterWang512/GANSketching) (shown in red), as shown below:
+<img src="readme_images/timeline.png" width="800px"/>
 
 ## Installation Instructions
 To install the requirements for each of the submodules, we have provided a shell script that can be run as follows:
