@@ -11,7 +11,7 @@ Our method (shown in blue) has shown to reduce the training time of [GAN Sketchi
 
 ### Cloning our repository
 ```
-git clone https://github.com/Aks-Dmv/TroGAN.git
+git clone --recursive https://github.com/Aks-Dmv/TroGAN.git
 cd TroGAN
 ```
 
