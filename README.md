@@ -33,7 +33,7 @@ We show our interpolation results (latent-space interpolaton between generated s
 
 ## Getting Started
 
-We have organized our repositor into three submodules forked from their original repositories. 
+We have organized our repository into three submodules forked from their original repositories. 
 
 1. The [ganSketching](https://github.com/eMYKion/GANSketching) folder contains the modified GAN sketching and incorporated CUT translation model (c2s mode by default).
 2. The [cut](https://github.com/eMYKion/contrastive-unpaired-translation) folder contains forked code required to train a CUT model from scratch.
@@ -121,7 +121,7 @@ Downloading LSUN takes a very long time (70GB). We only need 200 for training CU
 
 #### Training with  GANSketching c2s model
 
-To get pretrained GANSketching model weights, follow the directions from the [GANSketching README](https://github.com/eMYKion/GANSketching/tree/8b603e6d1836bf55768bc6d17a2ef133c3338a8f#download-datasets-and-pre-trained-models).
+To get pretrained GANSketching model weights, follow the directions from the [GANSketching README](https://github.com/eMYKion/GANSketching#download-datasets-and-pre-trained-models).
 
 The command (from the `ganSketching` folder) should look like:
 
@@ -130,7 +130,18 @@ The command (from the `ganSketching` folder) should look like:
 bash pretrained/download_pretrained_models.sh
 ```
 
+We also need a pretrained CUT model from **Step 4**.
+
+Then, run the training script from the [ganSketching folder](https://github.com/eMYKion/GANSketching#training-scripts) (changing the arguments accordingly):
+
+```bash
+# Train on a single quickdraw sketch
+bash scripts/train_quickdraw_single_horse0.sh
+```
+
+**NOTE 3:** this uses c2s CUT by default and requires `pretrained/cut.pth`. Outputs are logged to Weights and Biases.
+
 #### Evaluating with our Pre-trained TroGAN c2s model
-Our models for the generator, d,  can be downloaded [here](https://drive.google.com/drive/folders/1ShjmisBbIlUAVSskOl5i0k-6A8n_o-Tq?usp=sharing).
+Our models for the generator, sketch discriminator, image discriminator, and miscellaneous weights `*_net_misc.pth` (default ganSketching suite) can be downloaded [here](https://drive.google.com/drive/folders/1ShjmisBbIlUAVSskOl5i0k-6A8n_o-Tq?usp=sharing). We also include `cut.pth` for our CUT model.
 
-
+Note that running [ganSketching evaluations](https://github.com/eMYKion/GANSketching#evaluations) requires the default suite to be in the appropriate `pretrained/*` subfolder.
