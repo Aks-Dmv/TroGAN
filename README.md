@@ -1,4 +1,7 @@
 # TroGAN: Disguising Contours to Look Like Sketches
+[Link to This Repo](https://github.com/Aks-Dmv/TroGAN)
+
+
 This is our PyTorch implementation of TroGAN: Disguising Contours to Look Like Sketches. We implement a method that builds off the [GAN Sketching](https://github.com/PeterWang512/GANSketching) architecture by introducing an unpaired translation model trained using [CUT](https://github.com/taesungp/contrastive-unpaired-translation) that shifts the distribution of fake sketches to be more similar to that of the user-sketches while also retaining the essence of the initially generated image. Such a formulation avoids overfitting by the discriminator, thus reducing the discriminability and increasing gradient propagation.
 
 Work done by Akshay Dharmavaram and Mayank Mali in partial fullfillment of [16-824: Visual Learning and Recognition](https://visual-learning.cs.cmu.edu/index.html) while at CMU.
@@ -54,7 +57,7 @@ In order to run our examples, you will need model weights for the vanilla GANSke
 
 ### Step 3. QuickDraw dataset (If you want to train CUT from scratch, else jump to Step 4)
 
-Note that training cut also needs **contours** (see below).
+Note that training cut also needs **contours** (see NOTE 1 below).
 
 #### (Option 1) Using our compilation of sketches (converted to images)
 
@@ -87,7 +90,7 @@ python binary_file_parser.py
 ```
 You can modify the `binary_file_parser.py` according to your requirements. Your files should be in data after you are done.
 
-For **contours**, we need to pass horse images through the [photosketch StyleGAN2 model](https://www.ri.cmu.edu/wp-content/uploads/2019/01/Li-Mengtian-WACV-2019-Photo-Sketching.pdf)). Choose some images (same number of **user-sketches** above) from the horse LSUN dataset (instructions in the [ganSketching submodule](https://github.com/eMYKion/GANSketching#download-datasets-and-pre-trained-models)), and run:
+**NOTE 1:**  For contours, we need to pass horse images through the [photosketch StyleGAN2 model](https://www.ri.cmu.edu/wp-content/uploads/2019/01/Li-Mengtian-WACV-2019-Photo-Sketching.pdf)). Choose some images (same number of **user-sketches** above) from the horse LSUN dataset (instructions in the [ganSketching submodule](https://github.com/eMYKion/GANSketching#download-datasets-and-pre-trained-models)), and run:
 
 ```bash
 cd ganSketching
@@ -96,7 +99,7 @@ bash scripts/horse_img2cnt.sh
 # outputs to data/horse_cnt/
 ```
 
-**NOTE:** downloading LSUN takes a very long time (70GB). We only need 200 for training CUT and 20K for training TroGAN. We provide a subset of LSUN [here](https://drive.google.com/drive/folders/1ShjmisBbIlUAVSskOl5i0k-6A8n_o-Tq?usp=sharing).
+**NOTE 2:** downloading LSUN takes a very long time (70GB). We only need 200 for training CUT and 20K for training TroGAN. We provide a subset of LSUN [here](https://drive.google.com/drive/folders/1ShjmisBbIlUAVSskOl5i0k-6A8n_o-Tq?usp=sharing).
 
 Now that you have both **user-sketches** and **contours**, we can begin training CUT from scratch. Note you will have to move these datasets into the `cut` submodule according to **Step 4 (Option 2)**.
 
@@ -104,7 +107,7 @@ Now that you have both **user-sketches** and **contours**, we can begin training
 
 #### (Option 1) Using our pretrained CUT c2s model
 
-If you would like to retrain the cut model, However, if you would like to just download our pre-trained model, then it can be downloaded from here: 
+If you would like to retrain the cut model, However, if you would like to just download our pre-trained model (cut.pth), then it can be downloaded from [here](https://drive.google.com/drive/folders/13X-b2YRVsb0MPEWXjtcVXB39yGHaSEJn?usp=sharing).
 
 #### (Option 2) Train CUT from scratch
 We have provided the datasets (generated from the quickdraw submodule as well as passing real horse images through the [photosketch pretrained model](https://www.ri.cmu.edu/wp-content/uploads/2019/01/Li-Mengtian-WACV-2019-Photo-Sketching.pdf)) used for training our cut model here: [cut_training_dataset](https://drive.google.com/drive/folders/1ShjmisBbIlUAVSskOl5i0k-6A8n_o-Tq?usp=sharing).
@@ -114,8 +117,9 @@ To train a CUT model from scratch, you can follow the steps in the README in the
 ### GAN-Sketching Model
 
 #### Downloading GANSketching datasets
+Downloading LSUN takes a very long time (70GB). We only need 200 for training CUT and 20K for training TroGAN. We provide a subset of LSUN [here](https://drive.google.com/drive/folders/1ShjmisBbIlUAVSskOl5i0k-6A8n_o-Tq?usp=sharing).
 
-#### Using pretrained GANSketching c2s model
+#### Training with  GANSketching c2s model
 
 To get pretrained GANSketching model weights, follow the directions from the [GANSketching README](https://github.com/eMYKion/GANSketching/tree/8b603e6d1836bf55768bc6d17a2ef133c3338a8f#download-datasets-and-pre-trained-models).
 
@@ -125,5 +129,8 @@ The command (from the `ganSketching` folder) should look like:
 # Download pretrained models from StyleGAN2 and PhotoSketch
 bash pretrained/download_pretrained_models.sh
 ```
+
+#### Evaluating with our Pre-trained TroGAN c2s model
+Our models for the generator, d,  can be downloaded [here](https://drive.google.com/drive/folders/1ShjmisBbIlUAVSskOl5i0k-6A8n_o-Tq?usp=sharing).
 
 
