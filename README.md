@@ -36,33 +36,72 @@ We have organized our repositor into three submodules forked from their original
 2. The [cut](https://github.com/eMYKion/contrastive-unpaired-translation) folder contains forked code required to train a CUT model from scratch.
 3. The [quickdraw](https://github.com/eMYKion/quickdraw-dataset) folder contains modified forked code to download and render (to image files) the quickdraw user-sketches.
 
-### Cloning our repository
+### Step 1. Cloning our repository
 
 ```bash
 git clone --recursive https://github.com/Aks-Dmv/TroGAN.git
 cd TroGAN
 ```
 
-### Installation Instructions
+### Step 2. Installation Instructions
 To install the requirements for each of the submodules, we have provided a shell script that can be run as follows:
 
 ```bash
 bash install.sh
 ```
 
-In order to run our examples, you will need model weights for the vanilla GANSketching network and our CUT translation model (explained below).
+In order to run our examples, you will need model weights for the vanilla GANSketching network, our CUT translation model (explained below), and our quickdraw dataset (if you are training the cut model from scratch).
 
-### CUT Model
+### Step 3. QuickDraw dataset (If you want to train cut from scratch, else skip this step)
 
-#### Train CUT from scratch
 
-#### Using our pretrained CUT c2s model
+#### (Option 1) Using our compilation of sketches (converted to images)
 
-If you would like to retrain the cut model, you can follow the steps in the README in the cut folder. We suggest using the grumpy cat scripts as a baseline, and replacing the cat images with the datasets that you would like to use. However, if you would like to just download our pre-trained model, then it can be downloaded from here: 
+If you would like to retrain the cut model, you would need the horse sketches, which can be downloaded from here: [cut_training_dataset](https://drive.google.com/drive/folders/1ShjmisBbIlUAVSskOl5i0k-6A8n_o-Tq?usp=sharing).
 
-### Downloading CUT datasets
+#### (Option 2) Obtain the user-sketches directly from a custom binary format
+To train a CUT model from scratch, you would need a dataset of sketches. Please follow the steps in the README in the [quickdraw](https://github.com/eMYKion/quickdraw-dataset). However, if you would like to just download the horse binary files, you can execute the following command:
 
-### GAN Model
+```bash
+cd quickdraw
+mkdir data
+# to download horse binary files
+gsutil -m cp 'gs://quickdraw_dataset/full/binary/horse.bin' data/
+```
+
+Once the appropriate binary files (horse.bin) have been downloaded, execute the following commands:
+
+```bash
+# to install Cairo
+pip install cairocffi
+
+# if you are not in quickdraw folder, execute:
+# cd quickdraw
+
+# if you didn't create the data folder, execute:
+mkdir data
+
+cd examples
+python binary_file_parser.py
+```
+You can modify the `binary_file_parser.py` according to your requirements. Your files should be in data after you are done.
+
+### Step 4. CUT Model
+
+#### (Option 1) Using our pretrained CUT c2s model
+
+If you would like to retrain the cut model, However, if you would like to just download our pre-trained model, then it can be downloaded from here: 
+
+#### (Option 2) Train CUT from scratch
+We have provided the datasets (generated from the quickdraw submodule as well as passing real horse images through the [photosketch pretrained model](https://www.ri.cmu.edu/wp-content/uploads/2019/01/Li-Mengtian-WACV-2019-Photo-Sketching.pdf)) used for training our cut model here: [cut_training_dataset](https://drive.google.com/drive/folders/1ShjmisBbIlUAVSskOl5i0k-6A8n_o-Tq?usp=sharing).
+
+To train a CUT model from scratch, you can follow the steps in the README in the [cut folder](https://github.com/eMYKion/contrastive-unpaired-translation). We suggest running the scripts for the grumpy cat, and replacing the cat images with the datasets we have provided prior to training the model. Please train the CUT model as opposed to the fastCUT variant, as we found the latter underperforms considerably.  Please follow the steps provided to download the grumpify cat datasets, and replace them with the datasets provided. The quickdraw sketches were created from the code in the quickdraw submodule
+
+
+
+### GAN-Sketching Model
+
+#### Downloading GANSketching datasets
 
 #### Using pretrained GANSketching c2s model
 
@@ -75,4 +114,4 @@ The command (from the `ganSketching` folder) should look like:
 bash pretrained/download_pretrained_models.sh
 ```
 
-### Downloading GANSketching datasets
+
