@@ -1,6 +1,8 @@
 # TroGAN: Disguising Contours to Look Like Sketches
 [Link to This Repo](https://github.com/Aks-Dmv/TroGAN)
 
+You can also check out the report we added to this repo. [Click here to go to report.pdf](https://github.com/Aks-Dmv/TroGAN/blob/main/report.pdf)
+
 
 This is our PyTorch implementation of TroGAN: Disguising Contours to Look Like Sketches. We implement a method that builds off the [GAN Sketching](https://github.com/PeterWang512/GANSketching) architecture by introducing an unpaired translation model trained using [CUT](https://github.com/taesungp/contrastive-unpaired-translation) that shifts the distribution of fake sketches to be more similar to that of the user-sketches while also retaining the essence of the initially generated image. Such a formulation avoids overfitting by the discriminator, thus reducing the discriminability and increasing gradient propagation.
 
