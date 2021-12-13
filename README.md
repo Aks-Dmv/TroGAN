@@ -1,5 +1,5 @@
 # TroGAN: Disguising Contours to Look Like Sketches
-[Link to This Repo](https://github.com/Aks-Dmv/TroGAN)
+[Self-Referential Link to this same Repo](https://github.com/Aks-Dmv/TroGAN)
 
 You can also check out the report we added to this repo. [Click here to go to report.pdf](https://github.com/Aks-Dmv/TroGAN/blob/main/report.pdf)
 
